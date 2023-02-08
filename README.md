@@ -1,5 +1,5 @@
 <div align="center"><img src="./docs/images/charonlogo.svg" /></div>
-<h1 align="center">Charon<br/>The Distributed Validator middleware client</h1>
+<h1 align="center">Charon<br/>Клиент связующего программного обеспечения распределнного валидатора</h1>
 
 <p align="center"><a href="https://github.com/obolnetwork/charon/releases/"><img src="https://img.shields.io/github/tag/obolnetwork/charon.svg"></a>
 <a href="https://github.com/ObolNetwork/charon/blob/main/LICENSE"><img src="https://img.shields.io/github/license/obolnetwork/charon.svg"></a>
@@ -7,63 +7,58 @@
 <a href="https://goreportcard.com/report/github.com/obolnetwork/charon"><img src="https://goreportcard.com/badge/github.com/obolnetwork/charon"></a>
 <a href="https://github.com/ObolNetwork/charon/actions/workflows/golangci-lint.yml"><img src="https://github.com/obolnetwork/charon/workflows/golangci-lint/badge.svg"></a></p>
 
-This repo contains the source code for the distributed validator client _Charon_ (pronounced 'kharon'); a HTTP middleware client for Ethereum Staking that enables you to safely run a single validator across a group of independent nodes.
+В этом репозитории содержится исходный код клиента распределенного валидатора _Charon_ (произносится 'харон'); это HTTP-клиент связующего программного обеспечения для организации стейкинга в сети Ethereum, позволяющий безопасно запускать одного валидатора, функционирование которого обеспечивается группой независимых узлов.
 
-Charon is accompanied by a webapp called the [Distributed Validator Launchpad](https://goerli.launchpad.obol.tech/) for distributed validator key creation.
+Charon предлагается к использованию вместе с web-приложением [Distributed Validator Launchpad] (https://goerli.launchpad.obol.tech/) для распределенного создания ключей валидаторов.
 
-Charon is used by stakers to distribute the responsibility of running Ethereum Validators across a number of different instances and client implementations.
+Charon может быть использован стейкерами для распределения ответственности между несколькими различными узлами и реализациями программных клиентов для запуска валидатора в сети Ethereum.
 
-![Example Obol Cluster](./docs/images/DVCluster.png)
+![Пример кластера Obol](./docs/images/DVCluster.png)
 
-###### A Distributed Validator Cluster that uses the Charon client to hedge client and hardware failure risks
+###### Кластер распределенного валидатора, использующий клиент Charon для устранения рисков отказа программного обеспечения клиентов и отказа оборудования
 
-## Quickstart
+## Начало работы
 
-The easiest way to test out charon is with the [charon-distributed-validator-cluster](https://github.com/ObolNetwork/charon-distributed-validator-cluster) repo
-which contains a docker compose setup for running a full charon cluster on your local machine.
+Наиболее простым способом попробовать применение Charon является использование репозитория [charon-distributed-validator-cluster](https://github.com/ObolNetwork/charon-distributed-validator-cluster), содержащего конфигурацию docker compose для запуска полного кластера Charon на вашем устройстве.
 
-## Documentation
+## Документация
 
-The [Obol Docs](https://docs.obol.tech/) website is the best place to get started.
-The important sections are [intro](https://docs.obol.tech/docs/intro),
-[key concepts](https://docs.obol.tech/docs/int/key-concepts) and [charon](https://docs.obol.tech/docs/dv/introducing-charon).
+ Сайт [Obol Docs](https://docs.obol.tech/) является наилучшим местом для ознакомления с информацией. 
+ Наиболее важные разделы на нем: [введение](https://docs.obol.tech/docs/intro), [основные понятия](https://docs.obol.tech/docs/int/key-concepts), [charon](https://docs.obol.tech/docs/dv/introducing-charon).
 
-For detailed documentation on this repo, see the [docs](docs) folder:
+Для ознакомления с подробной документацией по этому репозиторию смотрите директорию [docs](docs):
 
-- [Configuration](docs/configuration.md): Configuring a charon node
-- [Architecture](docs/architecture.md): Overview of charon cluster and node architecture
-- [Project Structure](docs/structure.md): Project folder structure
-- [Branching and Release Model](docs/branching.md): Git branching and release model
-- [Go Guidelines](docs/goguidelines.md): Guidelines and principals relating to go development
-- [Contributing](docs/contributing.md): How to contribute to charon; githooks, PR templates, etc.
+Для ознакомления с подробной документацией по этому репозиторию смотрите директорию [docs](docs): 
+- [Настройка](docs/configuration.md): Настройка узла Charon 
+- [Структура](docs/architecture.md): Обзор архитектуры кластера и узла Charon 
+- [Структура проекта](docs/structure.md): Структура директорий проекта
+- [Модель ветвления и релизов](docs/branching.md): Модель ветвления и релизов Git 
+- [Рекомендации для Go](docs/goguidelines.md): Рекомендации и принципы в отношении разработки на Go 
+- [Участие](docs/contributing.md): Как внести свой вклад в создание Charon; Git-хуки, PR-шаблоны и т.п. 
 
-There is always the [charon godocs](https://pkg.go.dev/github.com/obolnetwork/charon) for the source code documentation.
 
-## Supported Consensus Layer Clients
+Для ознакомления с документацией по исходному коду доступна документация пакета [charon godocs](https://pkg.go.dev/github.com/obolnetwork/charon). 
 
-Charon integrates into the Ethereum consensus stack as a middleware between the validator client
-and the beacon node via the official [Eth Beacon Node REST API](https://ethereum.github.io/beacon-APIs/#/).
-Charon supports any upstream beacon node that serves the Beacon API.
-Charon aims to support any downstream standalone validator client that consumes the Beacon API.
+## Поддерживаемые клиенты для слоя консенсуса
 
-| Client                                             | Beacon Node | Validator Client | Notes                                   |
-| -------------------------------------------------- | :---------: | :--------------: |-----------------------------------------|
-| [Teku](https://github.com/ConsenSys/teku)          |     ✅      |        ✅        | Fully supported                         |
-| [Lighthouse](https://github.com/sigp/lighthouse)   |     ✅      |        ✅        | Fully supported                         |
-| [Lodestar](https://github.com/ChainSafe/lodestar)  |     ✅      |       \*️⃣        | DVT compatibility issue                 |
-| [Vouch](https://github.com/attestantio/vouch)      |     \*️⃣     |        ✅        | Only validator client provided          |
-| [Prysm](https://github.com/prysmaticlabs/prysm)    |     ✅      |        🛑        | Validator client requires gRPC API      |
-| [Nimbus](https://github.com/status-im/nimbus-eth2) |     ✅      |        ✅        | Soon to be supported |
+Charon интегрируется в стек решений для уровня консенсуса Ethereum в качестве связующего программного обеспечения между клиентом валидатора и Beacon-узлом через официальный [Eth Beacon Node REST API](https://ethereum.github.io/beacon-APIs/#/). Charon поддерживает любые реализаци Beacon-узлов, в которых присутствует Beacon API. Charon стремится поддерживать любые обособленные реализации клиентов валидатора, использующих Beacon API.
 
-## Project Status
+| Клиент                                             | Beacon-узел | Клиент валидатора | Примечание                                       |
+|----------------------------------------------------|-------------|-------------------|--------------------------------------------------|
+| [Teku](https://github.com/ConsenSys/teku)          | ✅           | ✅                 | Поддерживается полностью                         |
+| [Lighthouse](https://github.com/sigp/lighthouse)   | ✅           | ✅                 | Поддерживается полностью                         |
+| [Lodestar](https://github.com/ChainSafe/lodestar)  | ✅           | *️⃣                 | Проблема в совместимости с DVT                   |
+| [Vouch](https://github.com/attestantio/vouch)      | *️⃣           | ✅                 | Представлен только клиент валидатора             |
+| [Prysm](https://github.com/prysmaticlabs/prysm)    | ✅           | 🛑                 | Клиент валидатора требует использования gRPC API |
+| [Nimbus](https://github.com/status-im/nimbus-eth2) | ✅           | ✅                 | Поддержка ожидается скоро                        |
 
-It is still early days for the Obol Network and things are under active development.
-We are moving fast so check back in regularly to track the progress.
+## Статус проекта
 
-Charon is a distributed validator, so its main responsibility is performing validation duties.
-The following table outlines which clients have produced which duties on a public testnet, and which are still under construction (🚧 )
+Obol Network все еще находится на ранних этапх и все его составляющие находятся в активной разработке. Изменения происходят быстро, поэтому регулярно следите за обновлениями для отслеживания развития.
 
-| Duty \ Client                        |                      Teku                      |                    Lighthouse                    | Lodestar | Nimbus | Vouch | Prysm |
+Charon является распределенным валидатором, поэтому его основной ответственностью является выполнение задач для обеспечения функционирования валидатора. В следующей таблице демонстрируются клиенты и выполняемые ими задачи в публичной тестовой сети, а также, выполнение каких задач планируется к добавлению в них (🚧 )
+
+| Задача \ Клиент                        |                      Teku                      |                    Lighthouse                    | Lodestar | Nimbus | Vouch | Prysm |
 |--------------------------------------|:----------------------------------------------:|:------------------------------------------------:|:--------:|:------:|:-----:|:-----:|
 | _Attestation_                        |                       ✅                        |                        ✅                         |    🚧    |   🚧   |  ✅   |  🚧   |
 | _Attestation Aggregation_            |                       🚧                       |                        🚧                        |    🚧    |   🚧   |  🚧   |  🚧   |
